@@ -3,7 +3,9 @@ class AuthController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      token = JsonWebToken.encode(user_id: user.id)
+      token = JsonWebToken.encode(user_id: user.id,
+                                  email: user.email
+                                 )
       render json: { token: token }, 
              status: :created
     else
@@ -15,7 +17,9 @@ class AuthController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
     if user&.authenticate params[:password]
-      token = JsonWebToken.encode(user_id: user.id)
+      token = JsonWebToken.encode(user_id: user.id,
+                                  email: user.email
+                                 )
       render json: { token: token }, status: :ok
     else
       render json: { error: "Invalid credentials mister" },
