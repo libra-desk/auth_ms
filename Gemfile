@@ -48,3 +48,8 @@ end
 
 
 gem "dotenv-rails", "~> 3.1"
+
+gem "ruby-kafka", "~> 1.5"
+
+gem "sidekiq", "~> 8.0"
+gem "redis", "~> 5.4"
